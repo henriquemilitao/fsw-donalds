@@ -1,0 +1,45 @@
+npx create-next-app@15.1.6
+y
+
+typescript
+eslint
+tailwind 
+src 
+app router 
+turbopack no
+import alias no
+
+npm install prisma@6.2.1
+npm install @prisma/client@6.2.1
+npx prisma init
+
+npx prisma format
+npx prisma migrate dev
+add_initial_tables
+
+npx prisma db seed
+
+npx shadcn@2.3.0 init
+y
+default
+neutral
+yes css
+use --legacy-peer-deps
+
+depois pra instalar os componentes
+npx shadcn@2.3.0 add button
+
+git add .
+git commit -m "feat: add shadcn initial setup and components"
+
+git add .
+git commit -m "chore: update css variables"
+
+git add .
+git commit -m "chore: update app font"
+
+npm install -D eslint-plugin-import-sort@12.1.1
+npm install -D prettier-plugin-tailwindcss@0.6.5
+
+git add .
+git commit -m "chore: add eslint sort plugin an prettier tailwind plugin"
