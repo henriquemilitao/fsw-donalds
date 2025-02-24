@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 
 import { db } from '@/lib/prisma'
 
+import ProductDetails from './components/product-details'
 import ProductHeader from './components/product-header'
 
 interface ProductPageProps {
@@ -15,11 +16,28 @@ const ProductPage = async ({ params }: ProductPageProps) => {
     where: {
       id: productId,
     },
+    include: {
+      restaurant: {
+        select: {
+          name: true,
+          avatarImageUrl: true,
+          slug: true,
+        },
+      },
+    },
   })
 
   if (!product) return notFound()
 
-  return <ProductHeader product={product} />
+  if (slug.toUpperCase() !== product.restaurant.slug.toUpperCase())
+    return notFound()
+
+  return (
+    <div className="flex h-full flex-col">
+      <ProductHeader product={product} />
+      <ProductDetails product={product} />
+    </div>
+  )
 }
 
 export default ProductPage
