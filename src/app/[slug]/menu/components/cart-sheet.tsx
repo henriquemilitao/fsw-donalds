@@ -1,3 +1,5 @@
+'use client'
+
 import { useContext } from 'react'
 
 import {
@@ -11,15 +13,20 @@ import {
 import { CartContext } from '../contexts/cart'
 
 const CartSheet = () => {
-  const { toggleCart, isOpen } = useContext(CartContext)
+  const { toggleCart, isOpen, products } = useContext(CartContext)
 
   return (
     <Sheet open={isOpen} onOpenChange={toggleCart}>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle></SheetTitle>
-          <SheetDescription></SheetDescription>
+          <SheetTitle>Lindao</SheetTitle>
+          <SheetDescription>Description</SheetDescription>
         </SheetHeader>
+        {products.map((product) => (
+          <h2 key={product.id}>
+            {product.name} - {product.quantity}
+          </h2>
+        ))}
       </SheetContent>
     </Sheet>
   )
