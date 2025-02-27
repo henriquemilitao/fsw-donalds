@@ -16,3 +16,6 @@ export default function Home() {
 // 99b66fc feat: ensure cart product quantity can be increased
 // c0ddd4b feat: ensure cart product quantity can be decreased
 // 2c38788 feat: add initial cart product item component (without functionality)
+
+//stripe listen --forward-to localhost:3000/api/order/payment-success
+//npx prisma studio
