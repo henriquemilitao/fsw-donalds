@@ -29,8 +29,10 @@ export const createStripeCheckout = async ({
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card', 'boleto'],
     mode: 'payment',
-    success_url: `${origin}/${slug}/orders?cpf=${customerCpf}`,
-    cancel_url: `${origin}/${slug}/orders?cpf=${customerCpf}`,
+    // success_url: `${origin}/${slug}/orders?cpf=${customerCpf}`,
+    // cancel_url: `${origin}/${slug}/orders?cpf=${customerCpf}`,
+    success_url: `${origin}/${slug}?consumptionMethod=${consumptionMethod}&cpf=${customerCpf}`,
+    cancel_url: `${origin}/${slug}?consumptionMethod=${consumptionMethod}&cpf=${customerCpf}`,
     metadata: {
       orderId,
     },
