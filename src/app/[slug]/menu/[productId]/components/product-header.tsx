@@ -12,9 +12,9 @@ interface ProductHeaderProps {
 }
 
 const ProductHeader = ({ product }: ProductHeaderProps) => {
-  const {slug} = useParams<{slug: string}>()
+  const { slug } = useParams<{ slug: string }>()
   const router = useRouter()
-  const handleOrdersClick = () => router.push(`/${slug}/orders`);
+  const handleOrdersClick = () => router.push(`/${slug}/orders`)
 
   const handleBack = () => {
     router.back()
@@ -41,7 +41,6 @@ const ProductHeader = ({ product }: ProductHeaderProps) => {
         size="icon"
         className="absolute right-4 top-4 z-50 rounded-full"
         onClick={handleOrdersClick}
-        
       >
         <ScrollTextIcon />
       </Button>

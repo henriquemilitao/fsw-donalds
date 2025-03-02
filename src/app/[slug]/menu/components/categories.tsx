@@ -7,11 +7,11 @@ import { useContext, useState } from 'react'
 
 import { Button } from '@/components/ui/button'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
-
-import Products from './products'
-import { CartContext } from '../contexts/cart'
 import { formatCurrency } from '@/helpers/format-currency'
+
+import { CartContext } from '../contexts/cart'
 import CartSheet from './cart-sheet'
+import Products from './products'
 
 interface RestaurantCategoriesProps {
   restaurant: Prisma.RestaurantGetPayload<{
@@ -32,8 +32,7 @@ type MenuCategoryWithProducts = Prisma.MenuCategoryGetPayload<{
 }>
 
 const RestaurantCategories = ({ restaurant }: RestaurantCategoriesProps) => {
-  const { products, total, toggleCart, totalQuantity } =
-    useContext(CartContext);
+  const { products, total, toggleCart, totalQuantity } = useContext(CartContext)
 
   const [selectedCategory, setSelectedCategory] =
     useState<MenuCategoryWithProducts>(restaurant.menuCategories[0])
@@ -91,7 +90,7 @@ const RestaurantCategories = ({ restaurant }: RestaurantCategoriesProps) => {
             <p className="text-sm font-semibold">
               {formatCurrency(total)}
               <span className="text-xs font-normal text-muted-foreground">
-                / {totalQuantity} {totalQuantity > 1 ? "itens" : "item"}
+                / {totalQuantity} {totalQuantity > 1 ? 'itens' : 'item'}
               </span>
             </p>
           </div>

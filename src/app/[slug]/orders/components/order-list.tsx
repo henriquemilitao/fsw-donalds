@@ -1,14 +1,14 @@
-"use client";
+'use client'
 
-import { OrderStatus, Prisma } from "@prisma/client";
-import { ChevronLeftIcon, ScrollTextIcon } from "lucide-react";
-import Image from "next/image";
+import { OrderStatus, Prisma } from '@prisma/client'
+import { ChevronLeftIcon, ScrollTextIcon } from 'lucide-react'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { formatCurrency } from "@/helpers/format-currency";
-import { useRouter } from "next/navigation";
+import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
+import { Separator } from '@/components/ui/separator'
+import { formatCurrency } from '@/helpers/format-currency'
 
 interface OrderListProps {
   orders: Array<
@@ -16,34 +16,39 @@ interface OrderListProps {
       include: {
         restaurant: {
           select: {
-            name: true;
-            avatarImageUrl: true;
-          };
-        };
+            name: true
+            avatarImageUrl: true
+          }
+        }
         orderProducts: {
           include: {
-            product: true;
-          };
-        };
-      };
+            product: true
+          }
+        }
+      }
     }>
-  >;
+  >
 }
 
 const getStatusLabel = (status: OrderStatus) => {
-  if (status === "FINISHED") return "Finalizado";
-  if (status === "IN_PREPARATION") return "Em preparo";
-  if (status === "PENDING") return "Pendente";
-  return "";
-};
+  if (status === 'FINISHED') return 'Finalizado'
+  if (status === 'IN_PREPARATION') return 'Em preparo'
+  if (status === 'PENDING') return 'Pendente'
+  return ''
+}
 
 const OrderList = ({ orders }: OrderListProps) => {
-  const router = useRouter();
-  const handleBackClick = () => router.back();
+  const router = useRouter()
+  const handleBackClick = () => router.back()
 
   return (
     <div className="space-y-6 p-6">
-      <Button size="icon" variant="secondary" className="rounded-full" onClick={handleBackClick}>
+      <Button
+        size="icon"
+        variant="secondary"
+        className="rounded-full"
+        onClick={handleBackClick}
+      >
         <ChevronLeftIcon />
       </Button>
       <div className="flex items-center gap-3">
@@ -54,11 +59,12 @@ const OrderList = ({ orders }: OrderListProps) => {
         <Card key={order.id}>
           <CardContent className="space-y-4 p-5">
             <div
-              className={`w-fit rounded-full px-2 py-1 text-xs font-semibold text-white ${order.status === OrderStatus.FINISHED 
-                ? "bg-green-500 text-white" 
-                : order.status === OrderStatus.IN_PREPARATION 
-                  ? "bg-yellow-500 text-white" 
-                  : "bg-gray-400 text-gray-500"
+              className={`w-fit rounded-full px-2 py-1 text-xs font-semibold text-white ${
+                order.status === OrderStatus.FINISHED
+                  ? 'bg-green-500 text-white'
+                  : order.status === OrderStatus.IN_PREPARATION
+                    ? 'bg-yellow-500 text-white'
+                    : 'bg-gray-400 text-gray-500'
               } `}
             >
               {getStatusLabel(order.status)}
@@ -91,7 +97,7 @@ const OrderList = ({ orders }: OrderListProps) => {
         </Card>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default OrderList;
+export default OrderList

@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ConsumptionMethod } from '@prisma/client'
-import { loadStripe } from "@stripe/stripe-js";
+import { loadStripe } from '@stripe/stripe-js'
 import { Loader2Icon } from 'lucide-react'
 import { useParams, useSearchParams } from 'next/navigation'
 import { useContext, useTransition } from 'react'
@@ -31,9 +31,9 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 
-import { CartContext } from '../contexts/cart'
 import { createOrder } from '../actions/create-order'
-import { createStripeCheckout } from "../actions/create-stripe-checkout";
+import { createStripeCheckout } from '../actions/create-stripe-checkout'
+import { CartContext } from '../contexts/cart'
 import { isValidCpf, removeCpfPunctuation } from '../helpers/cpf'
 
 const formSchema = z.object({
@@ -77,8 +77,8 @@ const FinishOrderDialog = ({ open, onOpenChange }: FinishOrderDialogProps) => {
   const onSubmit = async (data: FormSchema) => {
     try {
       const consumptionMethod = searchParams.get(
-        "consumptionMethod",
-      ) as ConsumptionMethod;
+        'consumptionMethod'
+      ) as ConsumptionMethod
       startTransition(async () => {
         const order = await createOrder({
           consumptionMethod,
@@ -86,26 +86,24 @@ const FinishOrderDialog = ({ open, onOpenChange }: FinishOrderDialogProps) => {
           customerName: data.name,
           products,
           slug,
-        });
+        })
         const { sessionId } = await createStripeCheckout({
           products,
           slug,
           consumptionMethod,
           orderId: order.id,
           customerCpf: removeCpfPunctuation(data.cpf),
-        });
+        })
         const stripe = await loadStripe(
-          process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY!,
-        );
-        if (!stripe) return;
+          process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY!
+        )
+        if (!stripe) return
         await stripe.redirectToCheckout({
           sessionId,
-        });
-      });
-      
-  
+        })
+      })
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
   }
 
