@@ -1,8 +1,16 @@
-import { revalidatePath } from 'next/cache'
+'use client'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 export default function Home() {
-  revalidatePath(`/fsw-donalds`)
-  return <h1>Home</h1>
+  const router = useRouter()
+
+  useEffect(() => {
+    // Ao carregar a página, redireciona para '/fsw-donalds'
+    router.push('/fsw-donalds')
+  }, [router])
+
+  return <></>
 }
 
 // 204acbc (HEAD -> aula-05, origin/aula-05) feat: ensure all orders and back buttons work as expected
