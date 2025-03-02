@@ -13,13 +13,14 @@ const Products = ({ products }: ProductsProps) => {
   const { slug } = useParams()
   const searchParams = useSearchParams()
   const consumptionMethod = searchParams.get('consumptionMethod')
+  const cpf = searchParams.get('cpf')
 
   return (
     <div className="space-y-3 px-1.5">
       {products.map((product) => (
         <Link
           key={product.id}
-          href={`/${slug}/menu/${product.id}?consumptionMethod=${consumptionMethod}`}
+          href={`/${slug}/menu/${product.id}?consumptionMethod=${consumptionMethod}${cpf ? `&cpf=${cpf}` : ''}`}
           className="flex items-center justify-between gap-10 border-b py-3"
         >
           {/* ESQUERDA */}

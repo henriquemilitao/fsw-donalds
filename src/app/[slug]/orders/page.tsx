@@ -10,6 +10,7 @@ interface OrdersPageProps {
 
 const OrdersPage = async ({ searchParams }: OrdersPageProps) => {
   const { cpf } = await searchParams
+
   if (!cpf) {
     return <CpfForm />
   }

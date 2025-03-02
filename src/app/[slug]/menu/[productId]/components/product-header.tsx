@@ -3,7 +3,7 @@
 import { Product } from '@prisma/client'
 import { ChevronLeftIcon, ScrollTextIcon } from 'lucide-react'
 import Image from 'next/image'
-import { useParams, useRouter } from 'next/navigation'
+import { useParams, useRouter, useSearchParams } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
 
@@ -14,7 +14,10 @@ interface ProductHeaderProps {
 const ProductHeader = ({ product }: ProductHeaderProps) => {
   const { slug } = useParams<{ slug: string }>()
   const router = useRouter()
-  const handleOrdersClick = () => router.push(`/${slug}/orders`)
+  const cpf = useSearchParams().get('cpf')
+
+  const handleOrdersClick = () =>
+    router.push(`/${slug}/orders${cpf ? `?cpf=${cpf}` : ''}`)
 
   const handleBack = () => {
     router.back()

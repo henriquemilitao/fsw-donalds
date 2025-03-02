@@ -3,7 +3,7 @@
 import { Restaurant } from '@prisma/client'
 import { ChevronLeftIcon, ScrollTextIcon } from 'lucide-react'
 import Image from 'next/image'
-import { useParams, useRouter } from 'next/navigation'
+import { useParams, useRouter, useSearchParams } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
 
@@ -14,11 +14,13 @@ interface RestaurantHeaderProps {
 const RestaurantHeader = ({ restaurant }: RestaurantHeaderProps) => {
   const { slug } = useParams<{ slug: string }>()
   const router = useRouter()
+  const cpf = useSearchParams().get('cpf')
 
   const handleBack = () => {
-    router.back()
+    router.replace(`/${slug}${cpf ? `?cpf=${cpf}` : ''}`)
   }
-  const handleOrdersClick = () => router.push(`/${slug}/orders`)
+  const handleOrdersClick = () =>
+    router.push(`/${slug}/orders${cpf ? `?cpf=${cpf}` : ''}`)
 
   return (
     <div className="relative h-[250px] w-full">

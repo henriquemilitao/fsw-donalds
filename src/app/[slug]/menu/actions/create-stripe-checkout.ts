@@ -31,8 +31,8 @@ export const createStripeCheckout = async ({
     mode: 'payment',
     // success_url: `${origin}/${slug}/orders?cpf=${customerCpf}`,
     // cancel_url: `${origin}/${slug}/orders?cpf=${customerCpf}`,
-    success_url: `${origin}/${slug}?consumptionMethod=${consumptionMethod}&cpf=${customerCpf}`,
-    cancel_url: `${origin}/${slug}?consumptionMethod=${consumptionMethod}&cpf=${customerCpf}`,
+    success_url: `${origin}/${slug}/menu?consumptionMethod=${consumptionMethod}&cpf=${customerCpf}`,
+    cancel_url: `${origin}/${slug}/menu?consumptionMethod=${consumptionMethod}&cpf=${customerCpf}`,
     metadata: {
       orderId,
     },

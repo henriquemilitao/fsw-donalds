@@ -1,4 +1,7 @@
+import { revalidatePath } from 'next/cache'
+
 export default function Home() {
+  revalidatePath(`/fsw-donalds`)
   return <h1>Home</h1>
 }
 
